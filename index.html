@@ -233,7 +233,22 @@
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
     margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border);
   }
-
+  .module-panel {
+    margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  .module-summary {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px; cursor: pointer; list-style: none;
+    background: var(--surface2);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+    user-select: none;
+  }
+  .module-summary::-webkit-details-marker { display: none; }
+  .module-summary::marker { content: ''; }
+  .module-summary::before { content: '+'; font-size: 11px; margin-right: 4px; color: var(--azure); }
+  details[open].module-panel > .module-summary::before { content: '-'; }
+  .module-summary a { flex-shrink: 0; }
+  .module-body { padding: 2px 0; }
   /* ── TOPIC ITEM ── */
   .topic-item {
     display: grid;
@@ -403,8 +418,9 @@
         🎯 <strong>Not directly exam-weighted, but foundational</strong> — Microsoft sequences these prerequisite modules before any AZ-305 domain content. With your AZ-900 background you'll move through this quickly (a few hours). The CAF and WAF intros here are important — they underpin exam reasoning throughout all later phases.
         <br><br>⏱ ~1–2 hrs/week × 2 weeks. Move fast, don't linger.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Describe the core architectural components of Azure &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Describe the core architectural components of Azure &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">What is Microsoft Azure</div>
@@ -445,9 +461,11 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — Describe Azure compute services &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — Describe Azure compute services &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-compute-networking-services/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Describe Azure virtual machines</div>
@@ -504,9 +522,11 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 3 — Describe Azure storage services &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-storage-services/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 3 — Describe Azure storage services &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-storage-services/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Describe Azure storage accounts</div>
@@ -555,9 +575,11 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 4 — Describe Azure identity, access, and security &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 4 — Describe Azure identity, access, and security &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-azure-identity-access-security/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Describe Azure directory services</div>
@@ -638,9 +660,11 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 5 — Introduction to the Microsoft Cloud Adoption Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/cloud-adoption-framework/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 5 — Introduction to the Microsoft Cloud Adoption Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/cloud-adoption-framework/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Strategy</div>
@@ -721,9 +745,11 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 6 — Introduction to the Microsoft Azure Well-Architected Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-introduction/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 6 — Introduction to the Microsoft Azure Well-Architected Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-introduction/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Azure Well-Architected Framework pillars</div>
@@ -732,7 +758,8 @@
           <span class="topic-weight">Prereq</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="note-box">
         <strong>✔ Phase 0 Goal:</strong> Get comfortable with the shift from AZ-900 "what is it" thinking to AZ-305 "how do I design with it" thinking. The CAF and WAF intros here will come up repeatedly in every later phase — treat them as vocabulary, not just checkboxes.
       </div>
@@ -760,8 +787,9 @@
         🎯 <strong>Exam weight: ~26%</strong> — Microsoft's first core domain. Focus shifts to <em>designing</em> solutions, not just knowing services. Think in terms of "what's the right architecture choice and why." Many case study questions will hinge on identity design and governance structure.
         <br><br>⏱ 3–5 hrs/week × 4 weeks ≈ ~12–20 hrs total for this phase.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Design Governance &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-governance/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Design Governance &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-governance/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for governance</div>
@@ -834,9 +862,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — Design Authentication and Authorization Solutions &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — Design Authentication and Authorization Solutions &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for identity and access management (IAM)</div>
@@ -925,9 +955,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 3 — Design a Solution to Log and Monitor Azure Resources &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 3 — Design a Solution to Log and Monitor Azure Resources &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-solution-to-log-monitor-azure-resources/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for Azure Monitor data sources</div>
@@ -968,7 +1000,8 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="note-box">
         <strong>✔ Phase 1 Milestone:</strong> Complete all 3 modules in the Identity, Governance & Monitor learning path and pass the knowledge checks.<br>
         <strong>🛠 Hands-on:</strong> Create a free Azure subscription, set up Entra ID + RBAC + a Policy assignment. Walk through a governance hierarchy on paper.
@@ -997,8 +1030,9 @@
         🎯 <strong>Exam weight: ~17%</strong> — Microsoft sequences this before data storage, and it makes sense: HA/DR thinking should inform every storage and compute decision you design later. Shorter phase but high density — RTO/RPO trade-offs come up constantly in case studies.
         <br><br>⏱ 3–5 hrs/week × 3 weeks ≈ ~9–15 hrs total.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Describe High Availability and Disaster Recovery Strategies &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-high-availability-disaster-recovery-strategies/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Describe High Availability and Disaster Recovery Strategies &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/describe-high-availability-disaster-recovery-strategies/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Describe recovery time objective and recovery point objective</div>
@@ -1055,9 +1089,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — Design a Solution for Backup and Disaster Recovery &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-solution-for-backup-disaster-recovery/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — Design a Solution for Backup and Disaster Recovery &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-solution-for-backup-disaster-recovery/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for backup and recovery</div>
@@ -1122,7 +1158,8 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="note-box">
         <strong>✔ Phase 2 Milestone:</strong> Complete both BC modules and knowledge checks. Be able to answer: given an RTO of 1 hr and RPO of 15 min, what's the right Azure DR architecture?<br>
         <strong>🛠 Hands-on:</strong> Review an Azure Backup vault setup and walk through an ASR replication policy in the portal.
@@ -1151,8 +1188,9 @@
         🎯 <strong>Exam weight: ~24%</strong> — Heavy on scenario-based trade-offs: pick the right storage technology for the right problem. Many questions present a business scenario and ask you to choose between Blob, SQL, Cosmos, Table, etc. Learn the decision criteria cold, not just the service names.
         <br><br>⏱ 3–5 hrs/week × 3 weeks ≈ ~9–15 hrs total.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Design a Data Storage Solution for Non-Relational Data &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-storage-solution-for-non-relational-data/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Design a Data Storage Solution for Non-Relational Data &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-storage-solution-for-non-relational-data/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for data storage</div>
@@ -1217,9 +1255,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — Design a Data Storage Solution for Relational Data &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-storage-solution-for-relational-data/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — Design a Data Storage Solution for Relational Data &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-storage-solution-for-relational-data/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for Azure SQL Database</div>
@@ -1284,9 +1324,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 3 — Design Data Integration &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-integration/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 3 — Design Data Integration &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-data-integration/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design a data integration solution with Azure Data Factory</div>
@@ -1343,7 +1385,8 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="note-box">
         <strong>✔ Phase 3 Milestone:</strong> Complete all 3 data storage modules and pass knowledge checks. Be able to answer: given a globally distributed app needing 99.999% uptime with flexible schema — which data service and why?<br>
         <strong>🛠 Hands-on:</strong> Deploy a Cosmos DB free-tier account and explore consistency settings and partitioning.
@@ -1372,8 +1415,9 @@
         🎯 <strong>Exam weight: ~33% — the heaviest single domain.</strong> Compute, networking, app architecture, and migration design all live here. Your .NET/Azure background gives you a real edge on app services and container design. Spend the most time here — it's worth it.
         <br><br>⏱ 3–5 hrs/week × 3 weeks ≈ ~9–15 hrs total.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Design an Azure Compute Solution &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-compute-solution/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Design an Azure Compute Solution &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-compute-solution/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Choose an Azure compute service</div>
@@ -1446,9 +1490,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — Design an Application Architecture &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-application-architecture/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — Design an Application Architecture &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-application-architecture/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Describe message and event scenarios</div>
@@ -1521,9 +1567,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 3 — Design Network Solutions &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-network-solutions/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 3 — Design Network Solutions &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-network-solutions/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Recommend a network architecture solution based on workload requirements</div>
@@ -1588,9 +1636,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 4 — Design Migrations &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-migrations/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 4 — Design Migrations &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/design-migrations/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Evaluate migration with the Cloud Adoption Framework</div>
@@ -1655,7 +1705,8 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="note-box">
         <strong>✔ Phase 4 Milestone:</strong> Complete all 4 infra modules. Design a full 3-tier architecture on paper including networking, compute choice, RBAC, HA, and a DR strategy — walk through it like a case study.<br>
         <strong>🛠 Hands-on:</strong> Deploy an App Service + VNet integration + Private Endpoint in the free tier.
@@ -1684,8 +1735,9 @@
         🎯 <strong>Not a separate exam domain, but the reasoning framework behind almost every answer.</strong> Microsoft sequences the full WAF pillar series after all 4 exam domains — treat it as your final consolidation pass. Then go straight into practice tests and book the exam.
         <br><br>⏱ 3–5 hrs/week × 2 weeks. If practice scores are 80%+ after week 1, book the exam for week 3.
       </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 1 — Introduction to the Azure Well-Architected Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-introduction/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+      <details class="module-panel">
+        <summary class="module-summary">Module 1 — Introduction to the Azure Well-Architected Framework &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-introduction/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Azure Well-Architected Framework pillars</div>
@@ -1694,9 +1746,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 2 — WAF Reliability &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-reliability/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 2 — WAF Reliability &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-reliability/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Design for business requirements</div>
@@ -1737,9 +1791,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 3 — WAF Security &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-security/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 3 — WAF Security &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-security/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Plan your security readiness</div>
@@ -1780,9 +1836,11 @@
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 4 — WAF Cost Optimization &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-cost-optimization/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 4 — WAF Cost Optimization &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-cost-optimization/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Develop cost-management discipline</div>
@@ -1823,9 +1881,11 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 5 — WAF Operational Excellence &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-operational-excellence/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 5 — WAF Operational Excellence &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-operational-excellence/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Embrace DevOps culture</div>
@@ -1866,9 +1926,11 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
-      <div class="topic-section">
-        <div class="topic-section-title">Module 6 — WAF Performance Efficiency &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-performance-efficiency/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></div>
+        </div>
+      </details>
+      <details class="module-panel">
+        <summary class="module-summary">Module 6 — WAF Performance Efficiency &nbsp;<a href="https://learn.microsoft.com/en-us/training/modules/azure-well-architected-performance-efficiency/" target="_blank" style="color:var(--azure);text-decoration:none;font-size:9px;font-weight:600;">↗</a></summary>
+        <div class="module-body">
         <div class="topic-item" onclick="cycleStatus(this)">
           <div class="topic-text">
             <div class="topic-name">Negotiate realistic performance targets</div>
@@ -1901,7 +1963,8 @@
           <span class="topic-weight">Med</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
         </div>
-      </div>
+        </div>
+      </details>
       <div class="topic-section">
         <div class="topic-section-title">Practice & Final Preparation</div>
         <div class="topic-item" onclick="cycleStatus(this)">
