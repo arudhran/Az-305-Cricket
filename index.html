@@ -337,6 +337,37 @@
 
   /* ── FOOTER ── */
   footer { text-align: center; font-size: 11px; color: var(--muted); padding: 20px; letter-spacing: 0.5px; }
+
+  /* ── CRICKET ANALOGY PANELS ── */
+  .cricket-panel { margin-top: 8px; }
+  .cricket-summary {
+    font-size: 11px; color: var(--azure); cursor: pointer;
+    user-select: none; letter-spacing: 0.3px; display: inline-block; margin-top: 4px;
+  }
+  .cricket-summary::-webkit-details-marker { display: none; }
+  .cricket-summary::before { content: '▶ '; font-size: 9px; }
+  details[open] .cricket-summary::before { content: '▼ '; }
+  .cricket-date { color: var(--muted); font-weight: 400; }
+  .cricket-body {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; margin-top: 8px;
+    font-size: 12px; line-height: 1.7; color: var(--ink);
+  }
+  .cricket-setup { margin-bottom: 8px; }
+  .cricket-body h4 {
+    font-family: var(--font-serif); font-size: 13px;
+    color: var(--azure-deep); margin: 12px 0 4px;
+  }
+  [data-theme="dark"] .cricket-body h4 { color: var(--azure); }
+  .cricket-body h4:first-child { margin-top: 0; }
+  .cricket-body ul { padding-left: 18px; margin: 4px 0; }
+  .cricket-body li { margin-bottom: 4px; }
+  .cricket-exam { margin-top: 12px; }
+  .cricket-selfcheck {
+    background: var(--fog); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 12px; margin-top: 12px;
+    font-size: 11px; color: var(--muted); font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -887,6 +918,45 @@
           <div class="topic-text">
             <div class="topic-name">Design for Microsoft Entra business-to-business (B2B)</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/4-design-business-business" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey County Cricket Club (your organisation) regularly brings in guest players from overseas — BCCI-registered Indian players, Cricket Australia players, BBL freelancers. These guests don't get Surrey contracts. They keep their home board registration. Surrey's gate system accepts those external credentials and grants access only to the facilities Surrey has authorised. That's Microsoft Entra B2B: external partners sign in with their own identities, you stay in control of what they can reach.</p>
+                </div>
+                <h4>Things to know — the guest player model</h4>
+                <p><strong>External partner keeps their own identity management.</strong> The BCCI-registered guest presents their BCCI credentials at Surrey's gate. Surrey doesn't issue them a Surrey player ID, and never touches their home board login. If the guest forgets their BCCI password, they call BCCI — not Surrey.</p>
+                <p><strong>No account sync, no lifecycle management.</strong> When the guest's home contract expires, Surrey doesn't track it or deactivate anything. The guest's access lapses naturally because their home credentials stop working. Surrey carries zero lifecycle admin burden for external users.</p>
+                <p><strong>Guest uses their own identity to collaborate.</strong> The overseas player swipes their BCCI pass to enter Surrey's training ground, video analysis room, and nets. They're working with Surrey but remain identified as a BCCI player throughout.</p>
+                <p><strong>Work, school, or social identities all accepted.</strong> The guest could be a registered county professional (work identity), a university scholarship player (school identity), or a casual league amateur who authenticates via a social account. All are valid.</p>
+                <h4>The 4-step invitation flow</h4>
+                <p><strong>1 — Invite.</strong> Surrey's team manager fills in a form with the guest's name, email, and a personalised message: "You're invited to access our analysis platform and training schedule."</p>
+                <p><strong>2 — Consent.</strong> The guest receives the invitation by email. The first time they click the link, a consent screen appears: "Surrey wants to share these resources with you — do you agree?" They must accept before gaining any access. This is mandatory, not optional.</p>
+                <p><strong>3 — MFA (if required).</strong> If Surrey's conditional access policy requires MFA, the guest must enter a code sent to their mobile device before the dressing room door opens. Two gates: credential check, then OTP.</p>
+                <p><strong>4 — Access panel.</strong> The guest lands on Surrey's access panel — a notice board listing exactly which apps and services have been shared: fixtures system, video analysis tool, squad comms platform. These can be cloud-hosted or on-premises.</p>
+                <h4>Things to consider</h4>
+                <p><strong>Delegate guest management to app owners.</strong> The captain or team analyst — not the CEO — decides who gets access to the video analysis room. The app owner knows who needs what. Don't centralise B2B guest decisions in IT admin; push them to the person responsible for each app.</p>
+                <p><strong>Conditional access policies.</strong> Surrey can enforce rules: guests may only access the analysis platform from a club-approved device (device platform check), and only when physically at the ground (location check). An overseas player trying to log in from abroad at 3am gets blocked — not because their credentials are wrong, but because the access conditions aren't met.</p>
+                <p><strong>MFA for all guest access.</strong> Even with a valid home board pass, guests must complete an extra verification step before entering sensitive areas. Configured via conditional access policy, not per-user — applies consistently to all B2B guests reaching a given app.</p>
+                <p><strong>Federate with external identity providers.</strong> Surrey's gate recognises credentials from BCCI (enterprise IdP), Cricket Australia (enterprise IdP), Google, Facebook, and Microsoft personal accounts. Guests use their existing identity — no new Surrey account required. Set up federation with your partners' identity providers so external users don't create throwaway accounts.</p>
+                <p><strong>Self-service sign-up.</strong> A guest who hasn't been formally invited can walk up to the visitor kiosk, fill in their own details, choose their home board or social identity, and get provisioned automatically — no Surrey admin action required. The sign-up flow is customisable and can collect additional information during onboarding.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>B2B guests use their own identity — your organisation does not manage their accounts, passwords, or lifecycle.</li>
+                    <li>The invitation flow requires the guest to explicitly accept consent before gaining any access.</li>
+                    <li>Conditional access policies — not per-user settings — are used to enforce MFA, device platform, and location requirements on B2B guests.</li>
+                    <li>You can federate with external identity providers (Google, Facebook, enterprise IdPs) so guests use existing credentials rather than creating new accounts.</li>
+                    <li>Guest access decisions should be delegated to app owners, not managed centrally by IT.</li>
+                    <li>Self-service sign-up flows allow external users to onboard themselves, with configurable identity provider options and data collection.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> A partner organisation's analyst needs access to your Azure-hosted reporting app. Your security policy states you must not manage any external passwords or account lifecycles, and the analyst must verify their identity on every sign-in using their existing corporate credentials. Which Azure feature enables this, and what two configuration decisions must you make?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
