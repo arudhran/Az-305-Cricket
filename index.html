@@ -965,6 +965,51 @@
           <div class="topic-text">
             <div class="topic-name">Design for Azure Active Directory B2C (business-to-customer)</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/5-design-business-customer" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey CC has two completely separate access systems. The first is the internal staff/player directory — that's Microsoft Entra ID (B2B covers this). The second is the fan engagement platform: a ticket booking app, a loyalty points programme, a match-day experience app used by 50,000 supporters. Those fans are not staff, not players. They have their own Facebook, Google, or Amazon accounts. Azure AD B2C is that separate fan registration system — a distinct tenant from the staff directory, purpose-built for consumer-scale identity management. Note: B2C is deprecated for new projects as of May 2025; Microsoft Entra External ID is the replacement, but B2C remains on the AZ-305 exam.</p>
+                </div>
+                <h4>Two tenants — why they must stay separate</h4>
+                <p>Surrey has one tenant for staff and players (the Microsoft Entra org tenant) and a completely separate B2C tenant for fans. A fan account in the loyalty programme never appears in the staff directory. Mixing them would be like putting 50,000 ticket buyers in the same access-control database as the players and groundstaff — a security and management disaster. You register your fan-facing apps (ticket app, loyalty app) in the B2C tenant, not in the org tenant.</p>
+                <h4>Things to know about Azure AD B2C</h4>
+                <p><strong>Secure authentication with preferred identity providers.</strong> Fans use whatever account they already have — Facebook, Google, Amazon, Microsoft. They don't create a Surrey-specific password. B2C handles the authentication handshake with those providers.</p>
+                <p><strong>Capture sign-in, preference, and conversion data.</strong> Every time a fan logs in, B2C can record what they did — which stands they browsed, which merchandise they clicked. This data feeds analytics and marketing.</p>
+                <p><strong>Custom attributes.</strong> B2C stores up to 100 custom attributes per fan: favourite player, seat preference, hospitality tier, dietary requirements. These are available to all registered fan apps.</p>
+                <p><strong>Branded registration and custom UI.</strong> The fan sign-up page looks like Surrey's website, not a generic Microsoft form. Full HTML/CSS control, or use Microsoft's built-in page layout templates.</p>
+                <p><strong>Separate org account from customer account.</strong> Staff stay in the org tenant. Fans stay in the B2C tenant. Clean separation — critical for access control and GDPR compliance.</p>
+                <h4>Things to consider when using Azure AD B2C</h4>
+                <p><strong>Reusable user flows.</strong> Design one "new fan sign-up" flow and reuse it across the ticket app, the loyalty app, and the match-day app. User flows are preconfigured policy sequences (sign up, sign in, password reset, profile edit). Configure once, attach to multiple apps — consistent experience everywhere.</p>
+                <p><strong>Social identity sign-in.</strong> Fans don't want yet another password. Allow them to sign in with Facebook, LinkedIn, Amazon, Google, X, or Microsoft accounts. B2C supports a long and growing list of social identity providers.</p>
+                <p><strong>Customisable UI for branding.</strong> The fan portal must look like Surrey, not Microsoft. Write your own HTML/CSS or use the built-in page layout templates. Fully customisable per app — a junior membership sign-up page can look different from the hospitality portal.</p>
+                <p><strong>Integration with external user stores.</strong> B2C handles authentication, but the actual fan loyalty points and CRM data live in an external loyalty database. Use B2C purely for auth and delegate customer data storage to your CRM system. The external system is the source of truth for customer data; B2C is the gatekeeper.</p>
+                <p><strong>Third-party identity verification and proofing.</strong> For age-restricted hospitality bookings (alcohol service, junior membership rules), B2C collects the fan's registration data and passes it to a third-party proofing service. The external service validates the data, returns a trust score, and B2C acts on the result — approving or denying account creation. B2C doesn't do the proofing itself.</p>
+                <h4>B2B vs B2C — the key distinctions</h4>
+                <p><strong>Who the users are:</strong> B2B users are partner company employees (guest county players). B2C users are individual consumers (fans in the stands) who represent only themselves.</p>
+                <p><strong>Directory location:</strong> B2B guests live in your org directory, annotated as guest users. B2C customers live in a completely separate B2C tenant.</p>
+                <p><strong>Profile management:</strong> In B2B, your org manages partner profiles. In B2C, customers manage their own profiles — Surrey never edits a fan's preferences for them.</p>
+                <p><strong>Discoverability and privacy:</strong> B2B partners can discover each other in the directory. B2C customers are invisible to each other — privacy is enforced by design. A fan cannot look up another fan.</p>
+                <p><strong>Identity providers:</strong> B2B uses work/school accounts, SAML/WS-Fed, Gmail, Facebook. B2C adds local app accounts (any email or username), social accounts, and government-issued identity schemes.</p>
+                <p><strong>UI branding:</strong> B2B UI is branded for the host organisation. B2C UI is fully customisable per app — each fan-facing app can have its own look.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>Azure AD B2C is a separate Microsoft Entra tenant — not the same as your organisation's tenant. It is purpose-built for customer identity management.</li>
+                    <li>B2C is deprecated for new customers as of May 1, 2025. For new projects, use Microsoft Entra External ID. B2C is supported until at least May 2030.</li>
+                    <li>User flows are reusable, preconfigured policy sequences (sign-up, sign-in, password reset, profile edit) that can be shared across multiple apps.</li>
+                    <li>B2C stores up to 100 custom attributes per user and supports integration with external CRM or loyalty databases as the source of truth for customer data.</li>
+                    <li>B2C supports third-party identity verification: it collects user data and passes it to external proofing services — it does not perform proofing itself.</li>
+                    <li>B2B guests live in your org directory (annotated as guests). B2C customers live in a completely separate directory and are invisible to each other.</li>
+                    <li>B2C users manage their own profiles; B2B partner profiles are managed by your organisation.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> Tailwind Traders is launching a consumer loyalty app. Customers should sign in with their existing social accounts, see a fully branded registration page, and their data should be stored separately from employee records. Which identity solution do you choose, and why is the org's Microsoft Entra tenant not the right place to put these customer accounts?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
