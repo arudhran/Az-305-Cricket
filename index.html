@@ -337,6 +337,37 @@
 
   /* ── FOOTER ── */
   footer { text-align: center; font-size: 11px; color: var(--muted); padding: 20px; letter-spacing: 0.5px; }
+
+  /* ── CRICKET ANALOGY PANELS ── */
+  .cricket-panel { margin-top: 8px; }
+  .cricket-summary {
+    font-size: 11px; color: var(--azure); cursor: pointer;
+    user-select: none; letter-spacing: 0.3px; display: inline-block; margin-top: 4px;
+  }
+  .cricket-summary::-webkit-details-marker { display: none; }
+  .cricket-summary::before { content: '▶ '; font-size: 9px; }
+  details[open] .cricket-summary::before { content: '▼ '; }
+  .cricket-date { color: var(--muted); font-weight: 400; }
+  .cricket-body {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; margin-top: 8px;
+    font-size: 12px; line-height: 1.7; color: var(--ink);
+  }
+  .cricket-setup { margin-bottom: 8px; }
+  .cricket-body h4 {
+    font-family: var(--font-serif); font-size: 13px;
+    color: var(--azure-deep); margin: 12px 0 4px;
+  }
+  [data-theme="dark"] .cricket-body h4 { color: var(--azure); }
+  .cricket-body h4:first-child { margin-top: 0; }
+  .cricket-body ul { padding-left: 18px; margin: 4px 0; }
+  .cricket-body li { margin-bottom: 4px; }
+  .cricket-exam { margin-top: 12px; }
+  .cricket-selfcheck {
+    background: var(--fog); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 12px; margin-top: 12px;
+    font-size: 11px; color: var(--muted); font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -887,6 +918,45 @@
           <div class="topic-text">
             <div class="topic-name">Design for Microsoft Entra business-to-business (B2B)</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/4-design-business-business" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey County Cricket Club (your organisation) regularly brings in guest players from overseas — BCCI-registered Indian players, Cricket Australia players, BBL freelancers. These guests don't get Surrey contracts. They keep their home board registration. Surrey's gate system accepts those external credentials and grants access only to the facilities Surrey has authorised. That's Microsoft Entra B2B: external partners sign in with their own identities, you stay in control of what they can reach.</p>
+                </div>
+                <h4>Things to know — the guest player model</h4>
+                <p><strong>External partner keeps their own identity management.</strong> The BCCI-registered guest presents their BCCI credentials at Surrey's gate. Surrey doesn't issue them a Surrey player ID, and never touches their home board login. If the guest forgets their BCCI password, they call BCCI — not Surrey.</p>
+                <p><strong>No account sync, no lifecycle management.</strong> When the guest's home contract expires, Surrey doesn't track it or deactivate anything. The guest's access lapses naturally because their home credentials stop working. Surrey carries zero lifecycle admin burden for external users.</p>
+                <p><strong>Guest uses their own identity to collaborate.</strong> The overseas player swipes their BCCI pass to enter Surrey's training ground, video analysis room, and nets. They're working with Surrey but remain identified as a BCCI player throughout.</p>
+                <p><strong>Work, school, or social identities all accepted.</strong> The guest could be a registered county professional (work identity), a university scholarship player (school identity), or a casual league amateur who authenticates via a social account. All are valid.</p>
+                <h4>The 4-step invitation flow</h4>
+                <p><strong>1 — Invite.</strong> Surrey's team manager fills in a form with the guest's name, email, and a personalised message: "You're invited to access our analysis platform and training schedule."</p>
+                <p><strong>2 — Consent.</strong> The guest receives the invitation by email. The first time they click the link, a consent screen appears: "Surrey wants to share these resources with you — do you agree?" They must accept before gaining any access. This is mandatory, not optional.</p>
+                <p><strong>3 — MFA (if required).</strong> If Surrey's conditional access policy requires MFA, the guest must enter a code sent to their mobile device before the dressing room door opens. Two gates: credential check, then OTP.</p>
+                <p><strong>4 — Access panel.</strong> The guest lands on Surrey's access panel — a notice board listing exactly which apps and services have been shared: fixtures system, video analysis tool, squad comms platform. These can be cloud-hosted or on-premises.</p>
+                <h4>Things to consider</h4>
+                <p><strong>Delegate guest management to app owners.</strong> The captain or team analyst — not the CEO — decides who gets access to the video analysis room. The app owner knows who needs what. Don't centralise B2B guest decisions in IT admin; push them to the person responsible for each app.</p>
+                <p><strong>Conditional access policies.</strong> Surrey can enforce rules: guests may only access the analysis platform from a club-approved device (device platform check), and only when physically at the ground (location check). An overseas player trying to log in from abroad at 3am gets blocked — not because their credentials are wrong, but because the access conditions aren't met.</p>
+                <p><strong>MFA for all guest access.</strong> Even with a valid home board pass, guests must complete an extra verification step before entering sensitive areas. Configured via conditional access policy, not per-user — applies consistently to all B2B guests reaching a given app.</p>
+                <p><strong>Federate with external identity providers.</strong> Surrey's gate recognises credentials from BCCI (enterprise IdP), Cricket Australia (enterprise IdP), Google, Facebook, and Microsoft personal accounts. Guests use their existing identity — no new Surrey account required. Set up federation with your partners' identity providers so external users don't create throwaway accounts.</p>
+                <p><strong>Self-service sign-up.</strong> A guest who hasn't been formally invited can walk up to the visitor kiosk, fill in their own details, choose their home board or social identity, and get provisioned automatically — no Surrey admin action required. The sign-up flow is customisable and can collect additional information during onboarding.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>B2B guests use their own identity — your organisation does not manage their accounts, passwords, or lifecycle.</li>
+                    <li>The invitation flow requires the guest to explicitly accept consent before gaining any access.</li>
+                    <li>Conditional access policies — not per-user settings — are used to enforce MFA, device platform, and location requirements on B2B guests.</li>
+                    <li>You can federate with external identity providers (Google, Facebook, enterprise IdPs) so guests use existing credentials rather than creating new accounts.</li>
+                    <li>Guest access decisions should be delegated to app owners, not managed centrally by IT.</li>
+                    <li>Self-service sign-up flows allow external users to onboard themselves, with configurable identity provider options and data collection.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> A partner organisation's analyst needs access to your Azure-hosted reporting app. Your security policy states you must not manage any external passwords or account lifecycles, and the analyst must verify their identity on every sign-in using their existing corporate credentials. Which Azure feature enables this, and what two configuration decisions must you make?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
@@ -895,6 +965,51 @@
           <div class="topic-text">
             <div class="topic-name">Design for Azure Active Directory B2C (business-to-customer)</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/5-design-business-customer" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey CC has two completely separate access systems. The first is the internal staff/player directory — that's Microsoft Entra ID (B2B covers this). The second is the fan engagement platform: a ticket booking app, a loyalty points programme, a match-day experience app used by 50,000 supporters. Those fans are not staff, not players. They have their own Facebook, Google, or Amazon accounts. Azure AD B2C is that separate fan registration system — a distinct tenant from the staff directory, purpose-built for consumer-scale identity management. Note: B2C is deprecated for new projects as of May 2025; Microsoft Entra External ID is the replacement, but B2C remains on the AZ-305 exam.</p>
+                </div>
+                <h4>Two tenants — why they must stay separate</h4>
+                <p>Surrey has one tenant for staff and players (the Microsoft Entra org tenant) and a completely separate B2C tenant for fans. A fan account in the loyalty programme never appears in the staff directory. Mixing them would be like putting 50,000 ticket buyers in the same access-control database as the players and groundstaff — a security and management disaster. You register your fan-facing apps (ticket app, loyalty app) in the B2C tenant, not in the org tenant.</p>
+                <h4>Things to know about Azure AD B2C</h4>
+                <p><strong>Secure authentication with preferred identity providers.</strong> Fans use whatever account they already have — Facebook, Google, Amazon, Microsoft. They don't create a Surrey-specific password. B2C handles the authentication handshake with those providers.</p>
+                <p><strong>Capture sign-in, preference, and conversion data.</strong> Every time a fan logs in, B2C can record what they did — which stands they browsed, which merchandise they clicked. This data feeds analytics and marketing.</p>
+                <p><strong>Custom attributes.</strong> B2C stores up to 100 custom attributes per fan: favourite player, seat preference, hospitality tier, dietary requirements. These are available to all registered fan apps.</p>
+                <p><strong>Branded registration and custom UI.</strong> The fan sign-up page looks like Surrey's website, not a generic Microsoft form. Full HTML/CSS control, or use Microsoft's built-in page layout templates.</p>
+                <p><strong>Separate org account from customer account.</strong> Staff stay in the org tenant. Fans stay in the B2C tenant. Clean separation — critical for access control and GDPR compliance.</p>
+                <h4>Things to consider when using Azure AD B2C</h4>
+                <p><strong>Reusable user flows.</strong> Design one "new fan sign-up" flow and reuse it across the ticket app, the loyalty app, and the match-day app. User flows are preconfigured policy sequences (sign up, sign in, password reset, profile edit). Configure once, attach to multiple apps — consistent experience everywhere.</p>
+                <p><strong>Social identity sign-in.</strong> Fans don't want yet another password. Allow them to sign in with Facebook, LinkedIn, Amazon, Google, X, or Microsoft accounts. B2C supports a long and growing list of social identity providers.</p>
+                <p><strong>Customisable UI for branding.</strong> The fan portal must look like Surrey, not Microsoft. Write your own HTML/CSS or use the built-in page layout templates. Fully customisable per app — a junior membership sign-up page can look different from the hospitality portal.</p>
+                <p><strong>Integration with external user stores.</strong> B2C handles authentication, but the actual fan loyalty points and CRM data live in an external loyalty database. Use B2C purely for auth and delegate customer data storage to your CRM system. The external system is the source of truth for customer data; B2C is the gatekeeper.</p>
+                <p><strong>Third-party identity verification and proofing.</strong> For age-restricted hospitality bookings (alcohol service, junior membership rules), B2C collects the fan's registration data and passes it to a third-party proofing service. The external service validates the data, returns a trust score, and B2C acts on the result — approving or denying account creation. B2C doesn't do the proofing itself.</p>
+                <h4>B2B vs B2C — the key distinctions</h4>
+                <p><strong>Who the users are:</strong> B2B users are partner company employees (guest county players). B2C users are individual consumers (fans in the stands) who represent only themselves.</p>
+                <p><strong>Directory location:</strong> B2B guests live in your org directory, annotated as guest users. B2C customers live in a completely separate B2C tenant.</p>
+                <p><strong>Profile management:</strong> In B2B, your org manages partner profiles. In B2C, customers manage their own profiles — Surrey never edits a fan's preferences for them.</p>
+                <p><strong>Discoverability and privacy:</strong> B2B partners can discover each other in the directory. B2C customers are invisible to each other — privacy is enforced by design. A fan cannot look up another fan.</p>
+                <p><strong>Identity providers:</strong> B2B uses work/school accounts, SAML/WS-Fed, Gmail, Facebook. B2C adds local app accounts (any email or username), social accounts, and government-issued identity schemes.</p>
+                <p><strong>UI branding:</strong> B2B UI is branded for the host organisation. B2C UI is fully customisable per app — each fan-facing app can have its own look.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>Azure AD B2C is a separate Microsoft Entra tenant — not the same as your organisation's tenant. It is purpose-built for customer identity management.</li>
+                    <li>B2C is deprecated for new customers as of May 1, 2025. For new projects, use Microsoft Entra External ID. B2C is supported until at least May 2030.</li>
+                    <li>User flows are reusable, preconfigured policy sequences (sign-up, sign-in, password reset, profile edit) that can be shared across multiple apps.</li>
+                    <li>B2C stores up to 100 custom attributes per user and supports integration with external CRM or loyalty databases as the source of truth for customer data.</li>
+                    <li>B2C supports third-party identity verification: it collects user data and passes it to external proofing services — it does not perform proofing itself.</li>
+                    <li>B2B guests live in your org directory (annotated as guests). B2C customers live in a completely separate directory and are invisible to each other.</li>
+                    <li>B2C users manage their own profiles; B2B partner profiles are managed by your organisation.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> Tailwind Traders is launching a consumer loyalty app. Customers should sign in with their existing social accounts, see a fully branded registration page, and their data should be stored separately from employee records. Which identity solution do you choose, and why is the org's Microsoft Entra tenant not the right place to put these customer accounts?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
@@ -903,6 +1018,56 @@
           <div class="topic-text">
             <div class="topic-name">Design for conditional access</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/6-design-for-conditional-access" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey CC's gate system doesn't just check whether you have a ticket. It evaluates three things simultaneously: WHO you are (registered player, member, press, unknown visitor), WHERE you're coming from (main member gate at the Oval vs a back entrance in an unexpected city), and WHAT you're trying to access (players' dressing room, media box, hospitality suite). Based on all three signals combined, the gate either opens, asks for additional verification, or stays shut. That's Conditional Access — an if/then policy engine that sits between every sign-in attempt and every resource.</p>
+                </div>
+                <h4>Things to know — how the gate engine works</h4>
+                <p><strong>MFA with granular control.</strong> The gate doesn't challenge every member identically. A long-standing member walking through the main entrance at noon just flashes their card. The same member attempting to enter the committee room from an unrecognised location at 3am gets challenged: present your card AND confirm your identity by phone. MFA can be applied selectively — not blasted at everyone for every access.</p>
+                <p><strong>Named locations.</strong> Surrey defines trusted zones (the Oval, Guildford CC) and suspicious zones (any country where Surrey has no operations). These named locations are referenced directly in policies: allow from trusted zones, challenge or block from suspicious ones.</p>
+                <p><strong>Approved client apps only.</strong> The tactics board is accessible only via the official squad app on club-issued devices — not from a personal browser or a third-party app. Conditional Access enforces this at the service level.</p>
+                <p><strong>Managed devices.</strong> Devices must be enrolled in Surrey's device management system and meet the club's security baseline before accessing sensitive systems. A personal phone with unknown encryption status can only reach limited, low-sensitivity resources.</p>
+                <p><strong>Untrusted sources blocked.</strong> Sign-in attempts from locations Surrey has no operational presence in are automatically turned away at the gate — no credential check needed, the location alone is disqualifying.</p>
+                <p><strong>Report-only mode.</strong> Before changing gate policy from "card only" to "card + photo ID," Surrey runs a dry-run simulation: logs exactly who would have been turned away or challenged, without actually enforcing anything. No disruption to current access while assessing impact.</p>
+                <p><strong>What If tool.</strong> "What would happen if this specific analyst tried to access the video room from their personal laptop in Dubai?" Run the scenario against your current policy set before rolling it out. Plan and troubleshoot without consequences.</p>
+                <p><strong>License requirement.</strong> Conditional Access requires Microsoft Entra ID P1 or P2 (or Microsoft 365 Business Premium). It's a premium security operations contract — it's not included in the basic membership tier.</p>
+                <h4>Things to consider — designing your gate policies</h4>
+                <p><strong>Granular MFA based on location risk.</strong> Known location + normal hours = card only. Unknown location or unusual hours = card + OTP. Design policies to match friction to risk — don't require a second factor for every single sign-in at the cost of user experience.</p>
+                <p><strong>Block access from specific geographic areas.</strong> Create named locations for regions Surrey never operates in, then block all sign-ins from those locations. Critical: explicitly exempt admin accounts from geographic block policies, or you may lock yourself out during travel.</p>
+                <p><strong>Managed devices only for sensitive resources.</strong> Club-enrolled, MDM-compliant devices are known-good equipment. Personal devices have unknown protection levels — restrict them to low-sensitivity resources. Require managed device status for anything touching player data or financial systems.</p>
+                <p><strong>Approved client apps for data protection.</strong> Staff use personal phones for both personal and work tasks. If you're managing only the data rather than the entire device, require that work data is accessed exclusively via approved apps — not through any arbitrary browser or third-party client.</p>
+                <p><strong>Default policies for compromised accounts.</strong> Three baseline policies worth enabling: (1) require every user to register for MFA before the season starts — pre-emptive; (2) force an immediate password change for any user whose credentials appear in a breach dataset (high-risk user); (3) require MFA for any sign-in flagged as medium or high risk by Entra ID's sign-in risk engine.</p>
+                <p><strong>Block access as an override.</strong> Block overrides all other assignments — it's the ejection seat. Use it during app migrations when you want nobody signing in yet, to block specific network ranges, or to cut off apps still using legacy authentication from your tenant entirely.</p>
+                <p><strong>Block legacy authentication protocols.</strong> Older protocols (basic auth, SMTP auth, POP3, IMAP) don't support MFA and are the primary attack vector for password spray campaigns. Configure Conditional Access to block legacy protocols from reaching any Surrey app. This is one of the highest-impact, lowest-effort security controls available.</p>
+                <p><strong>Per-policy impact reporting.</strong> Each enabled Conditional Access policy now has a built-in impact graph in the Microsoft Entra admin centre showing affected users and sign-ins. No Log Analytics workspace is required — the graph is built in.</p>
+                <p><strong>Microsoft-managed policies (Secure Future Initiative).</strong> Microsoft provides pre-built, managed Conditional Access policies aligned to their Secure Future Initiative — covering device code flow restrictions and legacy authentication blocks. Like the ICC publishing mandatory anti-corruption protocols that all member boards must adopt: pre-defined, authoritative, one-click to enable.</p>
+                <p><strong>Conditional Access Optimization Agent.</strong> An AI-powered agent that continuously monitors your Conditional Access policies for gaps — users or scenarios not covered — and recommends fixes with one-click application. Requires Microsoft Entra P1 plus Security Copilot SCU licences. Think of it as an automated policy auditor that watches the gates 24/7 and flags any doors left unguarded.</p>
+                <p><strong>Report-only mode before any deployment.</strong> Use Report-only mode to simulate blocking legacy authentication, enforcing MFA, or implementing sign-in risk policies before they go live. You see exactly which users would be affected — by name and count — without disrupting anyone.</p>
+                <p><strong>What If tool for policy testing.</strong> Before deploying a new policy, run the What If tool with a representative set of user/device/location combinations. Catch unintended blocks or gaps in coverage before real users hit them.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>Conditional Access evaluates three signals: user identity, location/device, and the app being accessed — then allows, enforces MFA, or denies.</li>
+                    <li>Requires Microsoft Entra ID P1 or P2 (or Microsoft 365 Business Premium). Not available on free or P0 tiers.</li>
+                    <li>Named locations define trusted and untrusted geographic areas; policies reference these locations to allow, challenge, or block access.</li>
+                    <li>Report-only mode evaluates policy impact without enforcing anything — always use it before enabling a new policy in production.</li>
+                    <li>What If tool simulates how a specific user/device/location would be handled by your current policy set — for planning and troubleshooting.</li>
+                    <li>Blocking legacy authentication protocols is one of the highest-value Conditional Access controls — older protocols are the primary password-spray attack vector.</li>
+                    <li>Three default compromised-account policies: register all users for MFA, force password change for high-risk users, require MFA for medium/high sign-in risk.</li>
+                    <li>Block access overrides all other policy assignments — use during migrations or to cut off entire network ranges or legacy apps.</li>
+                    <li>Per-policy impact graphs are built into the Microsoft Entra admin centre; no Log Analytics workspace required.</li>
+                    <li>The Conditional Access Optimization Agent (AI-powered) requires Microsoft Entra P1 plus Security Copilot SCUs.</li>
+                    <li>Microsoft-managed policies (Secure Future Initiative) provide pre-built controls for device code flow and legacy auth — enable with one click.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> A Tailwind Traders admin wants to enforce MFA for all sign-ins from outside the UK without affecting users signing in from known office locations. Before going live, they want to verify exactly which users would be impacted. Which two Conditional Access tools do they use, in which order, and what does each one do?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
