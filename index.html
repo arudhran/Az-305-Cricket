@@ -1018,6 +1018,56 @@
           <div class="topic-text">
             <div class="topic-name">Design for conditional access</div>
             <a class="topic-link" href="https://learn.microsoft.com/en-us/training/modules/design-authentication-authorization-solutions/6-design-for-conditional-access" target="_blank">MS Learn: Auth & Authorization Solutions →</a>
+            <details class="cricket-panel">
+              <summary class="cricket-summary">🏏 Cricket analogy <span class="cricket-date">· 2026-05-18</span></summary>
+              <div class="cricket-body">
+                <div class="cricket-setup">
+                  <h4>The setup</h4>
+                  <p>Surrey CC's gate system doesn't just check whether you have a ticket. It evaluates three things simultaneously: WHO you are (registered player, member, press, unknown visitor), WHERE you're coming from (main member gate at the Oval vs a back entrance in an unexpected city), and WHAT you're trying to access (players' dressing room, media box, hospitality suite). Based on all three signals combined, the gate either opens, asks for additional verification, or stays shut. That's Conditional Access — an if/then policy engine that sits between every sign-in attempt and every resource.</p>
+                </div>
+                <h4>Things to know — how the gate engine works</h4>
+                <p><strong>MFA with granular control.</strong> The gate doesn't challenge every member identically. A long-standing member walking through the main entrance at noon just flashes their card. The same member attempting to enter the committee room from an unrecognised location at 3am gets challenged: present your card AND confirm your identity by phone. MFA can be applied selectively — not blasted at everyone for every access.</p>
+                <p><strong>Named locations.</strong> Surrey defines trusted zones (the Oval, Guildford CC) and suspicious zones (any country where Surrey has no operations). These named locations are referenced directly in policies: allow from trusted zones, challenge or block from suspicious ones.</p>
+                <p><strong>Approved client apps only.</strong> The tactics board is accessible only via the official squad app on club-issued devices — not from a personal browser or a third-party app. Conditional Access enforces this at the service level.</p>
+                <p><strong>Managed devices.</strong> Devices must be enrolled in Surrey's device management system and meet the club's security baseline before accessing sensitive systems. A personal phone with unknown encryption status can only reach limited, low-sensitivity resources.</p>
+                <p><strong>Untrusted sources blocked.</strong> Sign-in attempts from locations Surrey has no operational presence in are automatically turned away at the gate — no credential check needed, the location alone is disqualifying.</p>
+                <p><strong>Report-only mode.</strong> Before changing gate policy from "card only" to "card + photo ID," Surrey runs a dry-run simulation: logs exactly who would have been turned away or challenged, without actually enforcing anything. No disruption to current access while assessing impact.</p>
+                <p><strong>What If tool.</strong> "What would happen if this specific analyst tried to access the video room from their personal laptop in Dubai?" Run the scenario against your current policy set before rolling it out. Plan and troubleshoot without consequences.</p>
+                <p><strong>License requirement.</strong> Conditional Access requires Microsoft Entra ID P1 or P2 (or Microsoft 365 Business Premium). It's a premium security operations contract — it's not included in the basic membership tier.</p>
+                <h4>Things to consider — designing your gate policies</h4>
+                <p><strong>Granular MFA based on location risk.</strong> Known location + normal hours = card only. Unknown location or unusual hours = card + OTP. Design policies to match friction to risk — don't require a second factor for every single sign-in at the cost of user experience.</p>
+                <p><strong>Block access from specific geographic areas.</strong> Create named locations for regions Surrey never operates in, then block all sign-ins from those locations. Critical: explicitly exempt admin accounts from geographic block policies, or you may lock yourself out during travel.</p>
+                <p><strong>Managed devices only for sensitive resources.</strong> Club-enrolled, MDM-compliant devices are known-good equipment. Personal devices have unknown protection levels — restrict them to low-sensitivity resources. Require managed device status for anything touching player data or financial systems.</p>
+                <p><strong>Approved client apps for data protection.</strong> Staff use personal phones for both personal and work tasks. If you're managing only the data rather than the entire device, require that work data is accessed exclusively via approved apps — not through any arbitrary browser or third-party client.</p>
+                <p><strong>Default policies for compromised accounts.</strong> Three baseline policies worth enabling: (1) require every user to register for MFA before the season starts — pre-emptive; (2) force an immediate password change for any user whose credentials appear in a breach dataset (high-risk user); (3) require MFA for any sign-in flagged as medium or high risk by Entra ID's sign-in risk engine.</p>
+                <p><strong>Block access as an override.</strong> Block overrides all other assignments — it's the ejection seat. Use it during app migrations when you want nobody signing in yet, to block specific network ranges, or to cut off apps still using legacy authentication from your tenant entirely.</p>
+                <p><strong>Block legacy authentication protocols.</strong> Older protocols (basic auth, SMTP auth, POP3, IMAP) don't support MFA and are the primary attack vector for password spray campaigns. Configure Conditional Access to block legacy protocols from reaching any Surrey app. This is one of the highest-impact, lowest-effort security controls available.</p>
+                <p><strong>Per-policy impact reporting.</strong> Each enabled Conditional Access policy now has a built-in impact graph in the Microsoft Entra admin centre showing affected users and sign-ins. No Log Analytics workspace is required — the graph is built in.</p>
+                <p><strong>Microsoft-managed policies (Secure Future Initiative).</strong> Microsoft provides pre-built, managed Conditional Access policies aligned to their Secure Future Initiative — covering device code flow restrictions and legacy authentication blocks. Like the ICC publishing mandatory anti-corruption protocols that all member boards must adopt: pre-defined, authoritative, one-click to enable.</p>
+                <p><strong>Conditional Access Optimization Agent.</strong> An AI-powered agent that continuously monitors your Conditional Access policies for gaps — users or scenarios not covered — and recommends fixes with one-click application. Requires Microsoft Entra P1 plus Security Copilot SCU licences. Think of it as an automated policy auditor that watches the gates 24/7 and flags any doors left unguarded.</p>
+                <p><strong>Report-only mode before any deployment.</strong> Use Report-only mode to simulate blocking legacy authentication, enforcing MFA, or implementing sign-in risk policies before they go live. You see exactly which users would be affected — by name and count — without disrupting anyone.</p>
+                <p><strong>What If tool for policy testing.</strong> Before deploying a new policy, run the What If tool with a representative set of user/device/location combinations. Catch unintended blocks or gaps in coverage before real users hit them.</p>
+                <div class="cricket-exam">
+                  <h4>What AZ-305 expects you to know</h4>
+                  <ul>
+                    <li>Conditional Access evaluates three signals: user identity, location/device, and the app being accessed — then allows, enforces MFA, or denies.</li>
+                    <li>Requires Microsoft Entra ID P1 or P2 (or Microsoft 365 Business Premium). Not available on free or P0 tiers.</li>
+                    <li>Named locations define trusted and untrusted geographic areas; policies reference these locations to allow, challenge, or block access.</li>
+                    <li>Report-only mode evaluates policy impact without enforcing anything — always use it before enabling a new policy in production.</li>
+                    <li>What If tool simulates how a specific user/device/location would be handled by your current policy set — for planning and troubleshooting.</li>
+                    <li>Blocking legacy authentication protocols is one of the highest-value Conditional Access controls — older protocols are the primary password-spray attack vector.</li>
+                    <li>Three default compromised-account policies: register all users for MFA, force password change for high-risk users, require MFA for medium/high sign-in risk.</li>
+                    <li>Block access overrides all other policy assignments — use during migrations or to cut off entire network ranges or legacy apps.</li>
+                    <li>Per-policy impact graphs are built into the Microsoft Entra admin centre; no Log Analytics workspace required.</li>
+                    <li>The Conditional Access Optimization Agent (AI-powered) requires Microsoft Entra P1 plus Security Copilot SCUs.</li>
+                    <li>Microsoft-managed policies (Secure Future Initiative) provide pre-built controls for device code flow and legacy auth — enable with one click.</li>
+                  </ul>
+                </div>
+                <div class="cricket-selfcheck">
+                  <strong>Self-check:</strong> A Tailwind Traders admin wants to enforce MFA for all sign-ins from outside the UK without affecting users signing in from known office locations. Before going live, they want to verify exactly which users would be impacted. Which two Conditional Access tools do they use, in which order, and what does each one do?
+                </div>
+              </div>
+            </details>
           </div>
           <span class="topic-weight">High</span>
           <span class="status-pill todo" onclick="event.stopPropagation();cycleStatus(this.closest(\'.topic-item\'))"><span class="status-dot"></span>Not Started</span>
